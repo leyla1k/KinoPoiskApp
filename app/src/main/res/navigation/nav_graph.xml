@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentAllFilms">
+
+
+    <fragment
+        android:id="@+id/fragmentAllFilms"
+        android:name="com.example.android_task.ui.fragments.AllFilmsFragment"
+        android:label="AllFilmsFragment">
+
+        <action
+            android:id="@+id/action_allFilmsFragment_to_filmFragment"
+            app:destination="@id/filmFragment">
+        </action>
+        <action
+            android:id="@+id/action_fragmentAllFilms_to_filterFragment"
+            app:destination="@id/filterFragment" />
+        <action
+            android:id="@+id/action_fragmentAllFilms_to_newProjectDialogFragment"
+            app:destination="@id/newProjectDialogFragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/filmFragment"
+        android:name="com.example.android_task.ui.fragments.FilmFragment"
+        android:label="fragment_film"
+        tools:layout="@layout/fragment_film" >
+    <argument
+        android:name="filmIid"
+        app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.example.android_task.ui.fragments.FilterFragment"
+        android:label="FilterFragment" >
+        <action
+            android:id="@+id/action_filterFragment_to_fragmentAllFilms"
+            app:destination="@id/fragmentAllFilms" />
+    </fragment>
+    <dialog
+        android:id="@+id/newProjectDialogFragment"
+        android:name="com.example.android_task.ui.fragments.alertDialogSearch.NewProjectDialogFragment"
+        android:label="NewProjectDialogFragment" />
+
+
+</navigation>

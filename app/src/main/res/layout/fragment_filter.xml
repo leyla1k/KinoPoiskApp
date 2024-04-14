@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+
+    <TextView
+        android:id="@+id/tv_agerating"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginTop = "16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Введите возрастной рейтинг (Например, 12 или 12-18)" />
+
+    <EditText
+        android:id="@+id/et_agerating"
+        android:layout_marginTop = "16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_background"
+        android:inputType="text"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/tv_year"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginTop = "16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Введите года и промежутки через запятую (Например, 1992, 1982-1998)" />
+
+    <EditText
+        android:id="@+id/et_year"
+        android:layout_marginTop = "16dp"
+        android:background="@drawable/edittext_background"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="" />
+    <TextView
+        android:id="@+id/countries"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginTop = "16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выберите страны (листайте)" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewFilter"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        tools:listitem="@layout/filter_item" />
+
+    <TextView
+        android:id="@+id/tv_countries"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_filters"
+
+        app:backgroundTint="@null"
+        android:background="@drawable/gradient_orange_to_yellow"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Отфильтровать" />
+</LinearLayout>

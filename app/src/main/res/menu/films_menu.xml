@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<item
+        android:id="@+id/action_find"
+        android:icon="@drawable/ic_person"
+        app:showAsAction="always"
+        android:title="Поиск"/>
+    <item
+        android:id="@+id/action_one"
+        android:title="Фильтр: Год"/>
+    <item
+        android:id="@+id/action_two"
+        android:title="Фильтр: Страна"/>
+    <item
+        android:id="@+id/action_three"
+        android:title="Фильтр: Возрастной рейтинг"/>-->
+</menu>
