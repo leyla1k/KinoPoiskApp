@@ -16,11 +16,10 @@ interface ApiService {
         @Query("page") page: Int
     ): ListFilmsResponseDto
 
-    @GET("${Global.END_POINT}/{id}")//"${Constants.END_POINT}/{id}"
+    @GET("${Global.END_POINT}/{id}")
     suspend fun getFilmById(
         @Path("id") id: Int
     ): FilmResponseDto
-
 
     @GET(Global.END_POINT)
     suspend fun getFilmsListByFilter(
@@ -30,10 +29,8 @@ interface ApiService {
         @Query("ageRating") ageRating: List<String>?,
         @Query("countries.name") countries: List<String>?,
         @Query("isSeries") isSeries: Boolean?,
-        @Query("genres.name") genre: List<String>?,
+        @Query("genres.name") genre: List<String>?
     ): ListFilmsResponseDto
-//жанр, тип сериал/фтильм
-
 
     @GET(Global.END_POINT_SEARCH)
     suspend fun getFilmsByName(
@@ -41,21 +38,12 @@ interface ApiService {
         @Query("query") query: String,
     ): ListFilmsResponseDto
 
-
-    @GET("v1.4/movie?page=1&limit=10&year=2020&ageRating=12")
-    suspend fun getTest(
-    ): ListFilmsResponseDto
-
-
-
     @GET(Global.END_POINT_IMAGE)
     suspend fun getPosters(
         @Query("page") page: Int,
         @Query("selectFields") url: String = "url",
-        @Query("movieId") movieId: Int,
-
+        @Query("movieId") movieId: Int
     ): PostersResponseDto
-
 
     @GET(Global.END_POINT_REVIEW)
     suspend fun getReviews(
@@ -65,8 +53,5 @@ interface ApiService {
         @Query("selectFields") review: String,
         @Query("movieId") movieId: Int,
     ): ReviewsResponseDto
-
-
-
 
 }

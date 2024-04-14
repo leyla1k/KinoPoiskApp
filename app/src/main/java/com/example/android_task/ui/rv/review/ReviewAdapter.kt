@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.android_task.databinding.ItemReviewBinding
-import com.example.android_task.model.simple.Film
-
 import com.example.android_task.model.simple.Review
 
 
@@ -26,7 +24,6 @@ class ReviewAdapter : PagingDataAdapter<Review, ReviewViewHolder>(diffCallback) 
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
         return ReviewViewHolder(
             ItemReviewBinding.inflate(
@@ -44,7 +41,6 @@ class ReviewAdapter : PagingDataAdapter<Review, ReviewViewHolder>(diffCallback) 
                 onReviewClickListener?.invoke(item)
             }
         }
-
     }
 
 }

@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import javax.inject.Inject
 
 
 private const val MAX_HISTORY_SIZE = 20
-class HistoryManager(val sharedPreferences: SharedPreferences,val context: Context) {
+
+class HistoryManager(private val sharedPreferences: SharedPreferences, val context: Context) {
 
     fun addToHistory(query: String) {
         val history = getHistory().toMutableList()
@@ -28,7 +28,8 @@ class HistoryManager(val sharedPreferences: SharedPreferences,val context: Conte
 
     fun getHistory(): List<String> {
         val jsonString = sharedPreferences.getString("history", null)
-        return Gson().fromJson(jsonString, object : TypeToken<List<String>>() {}.type) ?: emptyList()
+        return Gson().fromJson(jsonString, object : TypeToken<List<String>>() {}.type)
+            ?: emptyList()
     }
 
     fun clearHistory() {

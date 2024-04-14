@@ -1,13 +1,12 @@
 package com.example.android_task.pagination
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.android_task.enums.RequestAction
-import com.example.android_task.model.simple.Film
 import com.example.android_task.model.dto.ListFilmsResponseDto
-import com.example.android_task.repository.FilmRepository
+import com.example.android_task.model.simple.Film
 import com.example.android_task.model.simple.Filter
+import com.example.android_task.repository.FilmRepository
 import com.example.android_task.utils.toFilmEntity
 import retrofit2.HttpException
 
@@ -24,7 +23,7 @@ class FilmPaginationSource(
             currentPage = params.key ?: 1
             lateinit var response: ListFilmsResponseDto
 
-                 response = networkRequest(currentPage)
+            response = networkRequest(currentPage)
 
             //add data in list
             LoadResult.Page(
@@ -65,15 +64,11 @@ class FilmPaginationSource(
                     data!!.listGenres,
                 )
             }
-
             RequestAction.GET_FILMS_BY_NAME -> {
                 response = repository.getFilmsByName(currentPage, query!!)
-
             }
-
             else -> println("x не соответствует ни одному из условий")
         }
-
         return response
     }
 }

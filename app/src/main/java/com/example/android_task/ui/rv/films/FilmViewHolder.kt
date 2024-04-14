@@ -8,18 +8,14 @@ import com.squareup.picasso.Picasso
 
 
 class FilmViewHolder(val binding: FilmListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
     fun onBind(item: Film) {
 
         with(binding) {
             Picasso.get().load(item.poster?.url).fit().centerInside()
                 .error(R.drawable.card_carousel_error).into(ivPic)
-
             tvFirstName.text = item!!.name
             tvId.text = item.id.toString()
 
         }
     }
-
-
 }

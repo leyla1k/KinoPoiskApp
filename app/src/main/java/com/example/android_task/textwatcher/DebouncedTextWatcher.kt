@@ -15,11 +15,11 @@ class DebouncedTextWatcher(
     private var runnable: Runnable? = null
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        // Не используется
+
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        // Не используется
+
     }
 
     override fun afterTextChanged(s: Editable?) {

@@ -4,7 +4,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android_task.databinding.ItemCarouselBinding
 import com.example.android_task.model.simple.Poster
 
-class CarouselItemViewHolder(val binding: ItemCarouselBinding) : RecyclerView.ViewHolder(binding.root){
+class CarouselItemViewHolder(val binding: ItemCarouselBinding) :
+    RecyclerView.ViewHolder(binding.root) {
     fun onBind(item: Poster) {
         with(binding) {
         }

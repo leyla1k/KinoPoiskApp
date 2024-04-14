@@ -17,8 +17,4 @@ class ReviewViewHolder(val binding: ItemReviewBinding) : RecyclerView.ViewHolder
         }
     }
 
-
-
-
-
 }

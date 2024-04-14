@@ -2,11 +2,10 @@ package com.example.android_task.ui.fragments
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -27,21 +26,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.math.abs
 
-
 @AndroidEntryPoint
 class FilmFragment : Fragment() {
     private var _binding: FragmentFilmBinding? = null
 
     private val binding get() = _binding!!
-
     private val filmIid by lazy { navArgs<FilmFragmentArgs>().value.filmIid }
-
-
-    lateinit var thisFilm :Film
+    lateinit var thisFilm: Film
     private val viewModel: FilmViewModel by viewModels()
     val reviewAdapter = ReviewAdapter()
-
-
     var listOfPosters = mutableListOf<Poster>()
 
     override fun onCreateView(
@@ -49,16 +42,14 @@ class FilmFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        runBlocking {//надо делать флоу во вьюмодели и коллектить, но выбрала самый простой вариант, не успевала
+        runBlocking {//флоу во вьюмодели и коллектить не успевала
             thisFilm = viewModel.getFilmById(id = filmIid)
 
         }
-        runBlocking {//надо делать флоу во вьюмодели и коллектить, но выбрала самый простой вариант, не успевала
+        runBlocking {
             listOfPosters = viewModel.getPosters().toMutableList()
 
         }
-
-
         _binding = FragmentFilmBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -85,12 +76,12 @@ class FilmFragment : Fragment() {
             }
         }
         reviewAdapter.onReviewClickListener = {
-          val review = it.review.toString()
-                findNavController().navigate(
-                    FilmFragmentDirections.actionFilmFragmentToReviewDialogFragment(
-                        review
-                    )
+            val review = it.review.toString()
+            findNavController().navigate(
+                FilmFragmentDirections.actionFilmFragmentToReviewDialogFragment(
+                    review
                 )
+            )
 
         }
 
@@ -104,8 +95,7 @@ class FilmFragment : Fragment() {
 
         binding.viewPager.adapter = CarouselRVAdapter(
             listOfPosters.toMutableList()
-        )//во ввсех фильмах по одному постеру не знала как показать карусель
-
+        )
 
         val compositePageTransformer = CompositePageTransformer()
         compositePageTransformer.addTransformer(MarginPageTransformer((40 * Resources.getSystem().displayMetrics.density).toInt()))
@@ -115,6 +105,5 @@ class FilmFragment : Fragment() {
         }
         binding.viewPager.setPageTransformer(compositePageTransformer)
     }
-
 
 }

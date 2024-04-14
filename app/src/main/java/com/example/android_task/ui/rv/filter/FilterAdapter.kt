@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android_task.R
 import com.example.android_task.databinding.FilterItemBinding
 
-class FilterAdapter: RecyclerView.Adapter<FilterViewHolder>() {
+class FilterAdapter : RecyclerView.Adapter<FilterViewHolder>() {
 
     var onFilterClickListener: ((String) -> Unit)? = null
     lateinit var itemFilterBinding: FilterItemBinding
@@ -18,17 +18,15 @@ class FilterAdapter: RecyclerView.Adapter<FilterViewHolder>() {
             notifyDataSetChanged()
         }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder {
-        itemFilterBinding = FilterItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        itemFilterBinding =
+            FilterItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FilterViewHolder(itemFilterBinding)
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
-
 
     override fun onBindViewHolder(holder: FilterViewHolder, position: Int) {
         val item = data[position]
@@ -48,6 +46,5 @@ class FilterAdapter: RecyclerView.Adapter<FilterViewHolder>() {
         }
 
     }
-
 
 }

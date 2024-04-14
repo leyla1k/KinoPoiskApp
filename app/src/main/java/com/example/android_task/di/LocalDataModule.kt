@@ -30,7 +30,7 @@ object LocalDataModule {
 
     @Provides
     @Singleton
-    fun provideDao(@ApplicationContext applicationContext: Context):FilmDao{
+    fun provideDao(@ApplicationContext applicationContext: Context): FilmDao {
         return MainDB.getDatabase(applicationContext).getFilmDao()
     }
 

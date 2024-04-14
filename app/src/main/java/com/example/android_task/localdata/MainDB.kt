@@ -9,11 +9,8 @@ import com.example.android_task.model.FilmEntity
 
 @Database(entities = [FilmEntity::class], version = 1, exportSchema = false)
 @TypeConverters(LocalDBConverter::class)
-abstract class MainDB : RoomDatabase(){
-
+abstract class MainDB : RoomDatabase() {
     abstract fun getFilmDao(): FilmDao
-
-
     companion object {
         @Volatile
         private var INSTANCE: MainDB? = null

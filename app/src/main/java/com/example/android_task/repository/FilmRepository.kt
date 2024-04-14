@@ -3,12 +3,7 @@ package com.example.android_task.repository
 
 import com.example.android_task.localdata.FilmDao
 import com.example.android_task.model.FilmEntity
-import com.example.android_task.model.dto.ReviewsResponseDto
-import com.example.android_task.model.simple.Film
 import com.example.android_task.network.ApiService
-import com.example.android_task.utils.Global
-import retrofit2.http.GET
-import retrofit2.http.Query
 import javax.inject.Inject
 
 class FilmRepository @Inject constructor(
@@ -32,7 +27,7 @@ class FilmRepository @Inject constructor(
         genre: List<String>?
     ) = api.getFilmsListByFilter(
         page, 10,
-        year, ageRating, countries, isSeries ,genre
+        year, ageRating, countries, isSeries, genre
     )
 
     suspend fun getPosters(
@@ -45,7 +40,7 @@ class FilmRepository @Inject constructor(
     suspend fun getReviews(
         page: Int,
         movieId: Int,
-    ) = api.getReviews(page, "title","type","review",movieId)
+    ) = api.getReviews(page, "title", "type", "review", movieId)
 
     suspend fun getFilmsListFromLocal(page: Int) = dao.getFilmsListFromLocal()
     suspend fun insertAllFilmsToLocal(films: List<FilmEntity>) = dao.insertAllFilmsToLocal(films)

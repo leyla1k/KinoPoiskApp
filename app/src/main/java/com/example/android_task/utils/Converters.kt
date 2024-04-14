@@ -1,19 +1,17 @@
 package com.example.android_task.utils
 
 import com.example.android_task.model.FilmEntity
-import com.example.android_task.model.simple.Film
 import com.example.android_task.model.dto.FilmResponseDto
-import com.example.android_task.model.simple.Poster
 import com.example.android_task.model.dto.PostersResponseDto
-
+import com.example.android_task.model.simple.Film
+import com.example.android_task.model.simple.Poster
 
 fun FilmResponseDto.toFilm(): Film {
 
     return Film(this.id, this.name, this.description, this.posters, this.rating)
 }
 
-
-fun Film.toFilmEntity():FilmEntity {
+fun Film.toFilmEntity(): FilmEntity {
     return FilmEntity(this.id, this.name, this.description, this.poster, this.rating)
 }
 
@@ -53,14 +51,6 @@ fun parseAgeRating(input: String): List<String>? {
     return input.split(", ").map { it.trim() }
 }
 
-/*
-fun parseFilterListToString(input: String?): List<String> {
-    if (input == null) {
-        return listOf()
-    }
-    return input.split(", ").map { it.trim() }
-}
-*/
 
 
 

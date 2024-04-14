@@ -11,8 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android_task.databinding.FragmentFilterBinding
-import com.example.android_task.model.simple.Filter
 import com.example.android_task.localdata.FilterFlow
+import com.example.android_task.model.simple.Filter
 import com.example.android_task.ui.rv.filter.FilterAdapter
 import com.example.android_task.ui.vm.FilmsViewModel
 import com.example.android_task.utils.Global
@@ -38,12 +38,10 @@ class FilterFragment : Fragment() {
     val genresList = mutableListOf<String>()
     val TAG = "FilterFragment"
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("lifecycle", "onViewCreated: debounce1 doneАШДЕУК")
         _binding = FragmentFilterBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -56,12 +54,11 @@ class FilterFragment : Fragment() {
 
         binding.recyclerViewFilter.layoutManager = managerCountries
         binding.recyclerViewFilter.adapter = countiresAdapter
-        countiresAdapter.data = Global.COUNTRIES//вызвать метод из апишки ту не забудь инде
+        countiresAdapter.data = Global.COUNTRIES//вызвать метод из апишки ту не забыть
 
         binding.recyclerViewFilterGenres.layoutManager = managerGenres
         binding.recyclerViewFilterGenres.adapter = genresAdapter
-        genresAdapter.data = Global.GENRES//вызвать метод из апишки ту не забудь инде
-
+        genresAdapter.data = Global.GENRES
 
         countiresAdapter.onFilterClickListener = {
             if (!countriesList.contains(it)) {
@@ -82,8 +79,6 @@ class FilterFragment : Fragment() {
         binding.btFilters.setOnClickListener() {
             val ageRate = parseAgeRating(binding.etAgerating.text.toString())
             val years = parseYears(binding.etYear.text.toString())
-
-
             if ((ageRate != null) &&
                 (years != null)
             ) {
@@ -112,7 +107,7 @@ class FilterFragment : Fragment() {
 
     }
 
-    private fun seekBarPosition():Boolean? {
+    private fun seekBarPosition(): Boolean? {
         when (binding.seekBar.progress) {
             0 -> {
                 return true

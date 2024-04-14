@@ -14,13 +14,12 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import com.example.android_task.ui.rv.films.FilmAdapter
 import com.example.android_task.databinding.FragmentAllFilmsBinding
-import com.example.android_task.localdata.HistoryManager
 import com.example.android_task.localdata.FilterFlow
+import com.example.android_task.localdata.HistoryManager
 import com.example.android_task.textwatcher.DebouncedTextWatcher
+import com.example.android_task.ui.rv.films.FilmAdapter
 import com.example.android_task.ui.vm.FilmsViewModel
-
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -94,13 +93,13 @@ class AllFilmsFragment : Fragment() {
             }
         }
 
+        binding.etSearch.addTextChangedListener(debouncedTextWatcher)
+        registerForContextMenu(binding.etSearch)
+
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.getFilms()
             binding.swipeRefresh.isRefreshing = false
         }
-
-        binding.etSearch.addTextChangedListener(debouncedTextWatcher)
-        registerForContextMenu(binding.etSearch)
 
         binding.ibDeleteHist.setOnClickListener {
             histManager.clearHistory()
@@ -127,9 +126,7 @@ class AllFilmsFragment : Fragment() {
     ) {
         super.onCreateContextMenu(menu, v, menuInfo)
         menu.setHeaderTitle("История поиска")
-
         val items = histManager.getHistory()
-        Log.d("TTEYHKJHGFDDF", "onViewCreated: ${items}")
         for (item in items) {
             menu.add(item)
         }
@@ -140,6 +137,4 @@ class AllFilmsFragment : Fragment() {
         binding.etSearch.setSelection(binding.etSearch.text.length)
         return super.onContextItemSelected(item)
     }
-
-
 }

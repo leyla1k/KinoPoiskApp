@@ -6,17 +6,15 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.android_task.enums.RequestAction
+import com.example.android_task.model.simple.Filter
 import com.example.android_task.pagination.FilmPaginationSource
 import com.example.android_task.repository.FilmRepository
-import com.example.android_task.model.simple.Filter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -30,10 +28,9 @@ class FilmsViewModel @Inject constructor(
     val TAG = "FilmsViewModel"
     var filmPaginationSource = FilmPaginationSource(repository)
     var requestAction = RequestAction.GET_FILMS_LIST
-    var query:String? = null
-    var data:Filter? = null
-    var isConnected:Boolean? = null
-
+    var query: String? = null
+    var data: Filter? = null
+    var isConnected: Boolean? = null
 
     var filmList = Pager(PagingConfig(1)) {
         filmPaginationSource = FilmPaginationSource(repository)
@@ -44,7 +41,7 @@ class FilmsViewModel @Inject constructor(
         filmPaginationSource
     }.flow.cachedIn(viewModelScope)
 
-    fun getFilms(){
+    fun getFilms() {
         this.requestAction = RequestAction.GET_FILMS_LIST
         filmPaginationSource.invalidate()
     }
@@ -66,8 +63,8 @@ class FilmsViewModel @Inject constructor(
     fun Context.networkStateFlow(): Flow<Boolean> = callbackFlow {
         val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-              /*  val isConnected = isNetworkConnected(context)
-                offer(isConnected)*/
+                /*  val isConnected = isNetworkConnected(context)
+                  offer(isConnected)*/
             }
         }
         val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
@@ -76,7 +73,8 @@ class FilmsViewModel @Inject constructor(
     }
 
     fun isNetworkAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
         if (connectivityManager != null) {
             val network = connectivityManager.activeNetwork ?: return false
             val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false

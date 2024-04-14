@@ -9,6 +9,19 @@ object Global {
     const val END_POINT_IMAGE: String = "v1.4/image"
     const val END_POINT_REVIEW: String = "v1.4/review"
 
-    val COUNTRIES: List<String> = listOf("Россия", "США", "Франция","Венгрия","Польша","Сербия")//не успела реализовать метод и пагинацию чтоб все страны были
-    val GENRES: List<String> = listOf("драма", "криминал", "комедия","ужасы","мелодрама")//не успела реализовать метод и пагинацию чтоб все страны были
+    val COUNTRIES: List<String> = listOf(
+        "Россия",
+        "США",
+        "Франция",
+        "Венгрия",
+        "Польша",
+        "Сербия"
+    )//метод из апи
+    val GENRES: List<String> = listOf(
+        "драма",
+        "криминал",
+        "комедия",
+        "ужасы",
+        "мелодрама"
+    )
 }
