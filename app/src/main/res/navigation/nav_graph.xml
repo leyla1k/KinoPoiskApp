@@ -18,9 +18,7 @@
         <action
             android:id="@+id/action_fragmentAllFilms_to_filterFragment"
             app:destination="@id/filterFragment" />
-        <action
-            android:id="@+id/action_fragmentAllFilms_to_newProjectDialogFragment"
-            app:destination="@id/newProjectDialogFragment" />
+
 
     </fragment>
 
@@ -33,6 +31,10 @@
     <argument
         android:name="filmIid"
         app:argType="integer" />
+        <action
+            android:id="@+id/action_filmFragment_to_reviewDialogFragment"
+            app:destination="@id/reviewDialogFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/filterFragment"
@@ -43,9 +45,15 @@
             app:destination="@id/fragmentAllFilms" />
     </fragment>
     <dialog
-        android:id="@+id/newProjectDialogFragment"
-        android:name="com.example.android_task.ui.fragments.alertDialogSearch.NewProjectDialogFragment"
-        android:label="NewProjectDialogFragment" />
+        android:id="@+id/reviewDialogFragment"
+        android:name="com.example.android_task.ui.fragments.ReviewDialogFragment"
+        android:label="ReviewDialogFragment" >
+        <argument
+            android:name="review"
+            app:argType="string" />
+    </dialog>
+
+
 
 
 </navigation>

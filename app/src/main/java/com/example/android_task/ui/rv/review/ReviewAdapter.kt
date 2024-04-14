@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.android_task.databinding.ItemReviewBinding
+import com.example.android_task.model.simple.Film
 
 import com.example.android_task.model.simple.Review
 
 
 class ReviewAdapter : PagingDataAdapter<Review, ReviewViewHolder>(diffCallback) {
-
+    var onReviewClickListener: ((Review) -> Unit)? = null
 
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Review>() {
@@ -38,6 +39,12 @@ class ReviewAdapter : PagingDataAdapter<Review, ReviewViewHolder>(diffCallback) 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
         val item = getItem(position)
         holder.onBind(item!!)
+        with(holder.binding) {
+            container.setOnClickListener() {
+                onReviewClickListener?.invoke(item)
+            }
+        }
+
     }
 
 }

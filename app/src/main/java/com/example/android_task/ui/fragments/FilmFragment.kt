@@ -1,6 +1,5 @@
 package com.example.android_task.ui.fragments
 
-import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -19,14 +19,12 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.android_task.databinding.FragmentFilmBinding
 import com.example.android_task.model.simple.Film
 import com.example.android_task.model.simple.Poster
-import com.example.android_task.ui.rv.FilmAdapter
 import com.example.android_task.ui.rv.carousel.CarouselRVAdapter
 import com.example.android_task.ui.rv.review.ReviewAdapter
 import com.example.android_task.ui.vm.FilmViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import javax.inject.Inject
 import kotlin.math.abs
 
 
@@ -57,7 +55,7 @@ class FilmFragment : Fragment() {
         }
         runBlocking {//надо делать флоу во вьюмодели и коллектить, но выбрала самый простой вариант, не успевала
             listOfPosters = viewModel.getPosters().toMutableList()
-            Log.d("listOfPosters", "onCreateView: $listOfPosters")
+
         }
 
 
@@ -85,6 +83,15 @@ class FilmFragment : Fragment() {
                 reviewAdapter.submitData(list)
 
             }
+        }
+        reviewAdapter.onReviewClickListener = {
+          val review = it.review.toString()
+                findNavController().navigate(
+                    FilmFragmentDirections.actionFilmFragmentToReviewDialogFragment(
+                        review
+                    )
+                )
+
         }
 
         binding.viewPager.apply {

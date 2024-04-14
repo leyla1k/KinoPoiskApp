@@ -8,6 +8,7 @@ import com.example.android_task.model.simple.Film
 import com.example.android_task.model.dto.ListFilmsResponseDto
 import com.example.android_task.repository.FilmRepository
 import com.example.android_task.model.simple.Filter
+import com.example.android_task.utils.toFilmEntity
 import retrofit2.HttpException
 
 class FilmPaginationSource(
@@ -15,23 +16,15 @@ class FilmPaginationSource(
     var requestAction: RequestAction = RequestAction.GET_FILMS_LIST,
     var data: Filter? = null,
     var query: String? = null,
+    var isConnected: Boolean? = true,
 ) : PagingSource<Int, Film>() {
-
+    var currentPage = 0
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Film> {
         return try {
-            val currentPage = params.key ?: 1
+            currentPage = params.key ?: 1
+            lateinit var response: ListFilmsResponseDto
 
-            Log.d(
-                "FilmPaginationSource",
-                "load: ${this} } ${requestAction}   }"
-            )
-            //  lateinit var response: ListFilmsResponseDto
-
-            val response = networkRequest(currentPage)
-
-            if (response.list.isEmpty()) {
-                return LoadResult.Error(Exception())
-            }
+                 response = networkRequest(currentPage)
 
             //add data in list
             LoadResult.Page(
@@ -42,8 +35,6 @@ class FilmPaginationSource(
 
         } catch (e: Exception) {
             //internet filer exception
-
-            //выполение из рума?
 
             LoadResult.Error(e)
         } catch (e: HttpException) {
@@ -56,32 +47,33 @@ class FilmPaginationSource(
         return 1
     }
 
-        suspend fun networkRequest(currentPage: Int): ListFilmsResponseDto {
-            lateinit var response: ListFilmsResponseDto
-            when (requestAction) {
-                RequestAction.GET_FILMS_LIST -> {
-                    response = repository.getFilmsList(currentPage)
-                }
-
-                RequestAction.GET_FILMS_LIST_BY_FILTER -> {
-                    response = repository.getFilmsListByFilter(
-                        currentPage,
-                        data!!.listYears,
-                        data!!.listAgeRating,
-                        data!!.listCountries,
-                        data!!.isSeries,
-                        data!!.listGenres,
-                    )
-                }
-
-                RequestAction.GET_FILMS_BY_NAME -> {
-                    response = repository.getFilmsByName(currentPage, query!!)
-
-                }
-
-                else -> println("x не соответствует ни одному из условий")
+    suspend fun networkRequest(currentPage: Int): ListFilmsResponseDto {
+        lateinit var response: ListFilmsResponseDto
+        when (requestAction) {
+            RequestAction.GET_FILMS_LIST -> {
+                response = repository.getFilmsList(currentPage)
+                repository.insertAllFilmsToLocal(response.list.map { it.toFilmEntity() })
             }
 
-            return response
+            RequestAction.GET_FILMS_LIST_BY_FILTER -> {
+                response = repository.getFilmsListByFilter(
+                    currentPage,
+                    data!!.listYears,
+                    data!!.listAgeRating,
+                    data!!.listCountries,
+                    data!!.isSeries,
+                    data!!.listGenres,
+                )
+            }
+
+            RequestAction.GET_FILMS_BY_NAME -> {
+                response = repository.getFilmsByName(currentPage, query!!)
+
+            }
+
+            else -> println("x не соответствует ни одному из условий")
         }
+
+        return response
     }
+}

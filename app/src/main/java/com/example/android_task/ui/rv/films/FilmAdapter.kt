@@ -1,4 +1,4 @@
-package com.example.android_task.ui.rv
+package com.example.android_task.ui.rv.films
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

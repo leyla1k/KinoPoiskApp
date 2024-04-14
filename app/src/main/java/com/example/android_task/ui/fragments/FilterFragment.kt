@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android_task.databinding.FragmentFilterBinding
 import com.example.android_task.model.simple.Filter
 import com.example.android_task.localdata.FilterFlow
-import com.example.android_task.ui.rv.FilterAdapter
+import com.example.android_task.ui.rv.filter.FilterAdapter
 import com.example.android_task.ui.vm.FilmsViewModel
 import com.example.android_task.utils.Global
 import com.example.android_task.utils.parseAgeRating

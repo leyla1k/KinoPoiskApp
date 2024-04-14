@@ -14,7 +14,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import com.example.android_task.ui.rv.FilmAdapter
+import com.example.android_task.ui.rv.films.FilmAdapter
 import com.example.android_task.databinding.FragmentAllFilmsBinding
 import com.example.android_task.localdata.HistoryManager
 import com.example.android_task.localdata.FilterFlow
