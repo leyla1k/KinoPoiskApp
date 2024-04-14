@@ -29,8 +29,10 @@ interface ApiService {
         @Query("year") year: List<String>?,
         @Query("ageRating") ageRating: List<String>?,
         @Query("countries.name") countries: List<String>?,
+        @Query("isSeries") isSeries: Boolean?,
+        @Query("genres.name") genre: List<String>?,
     ): ListFilmsResponseDto
-//жанр
+//жанр, тип сериал/фтильм
 
 
     @GET(Global.END_POINT_SEARCH)

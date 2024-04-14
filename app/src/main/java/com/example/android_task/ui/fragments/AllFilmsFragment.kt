@@ -43,14 +43,12 @@ class AllFilmsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentAllFilmsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         filmAdapter.addLoadStateListener { loadState ->
             when (loadState.append) {
@@ -98,7 +96,6 @@ class AllFilmsFragment : Fragment() {
 
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.getFilms()
-
             binding.swipeRefresh.isRefreshing = false
         }
 
@@ -113,7 +110,6 @@ class AllFilmsFragment : Fragment() {
                 AllFilmsFragmentDirections.actionFragmentAllFilmsToFilterFragment(
                 )
             )
-
         }
         filmAdapter.onFilmClickListener = {
             findNavController().navigate(

@@ -47,38 +47,16 @@ fun parseAgeRating(input: String): List<String>? {
     return input.split(", ").map { it.trim() }
 }
 
-fun parseCountries(input: String?): List<String> {
+/*
+fun parseFilterListToString(input: String?): List<String> {
     if (input == null) {
         return listOf()
     }
     return input.split(", ").map { it.trim() }
 }
+*/
 
 
-/*fun mapToEndPoint(//ловить 400 ошбику!!!
-    filter: Filter
-): String {
-    val endPoint: StringBuilder = StringBuilder("")
-    // ?year=2023&genres.name=криминал&genres.name=драма
 
-    var i = 0
-    while (i < filter.listYears.size) {
-        endPoint.append("year=${filter.listYears[i]}&")
-        i += i
-    }
-    i = 0
-    while (i < filter.listAgeRating.size) {
-        endPoint.append("ageRating=${filter.listAgeRating[i]}&")
-        i += i
-    }
-    i = 0
-    while (i < filter.listCountries.size) {
-        endPoint.append("countries.name=${filter.listCountries[i]}&")
-        i += i
-    }
-    endPoint.deleteCharAt(endPoint.lastIndex)
-
-    return endPoint.toString()
-}*/
 
 

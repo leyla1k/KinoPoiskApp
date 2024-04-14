@@ -17,10 +17,8 @@ import com.example.android_task.ui.rv.FilterAdapter
 import com.example.android_task.ui.vm.FilmsViewModel
 import com.example.android_task.utils.Global
 import com.example.android_task.utils.parseAgeRating
-import com.example.android_task.utils.parseCountries
 import com.example.android_task.utils.parseYears
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.StringBuilder
 
 /**
  * A simple [Fragment] subclass.
@@ -33,8 +31,11 @@ class FilterFragment : Fragment() {
     private var _binding: FragmentFilterBinding? = null
 
     private val viewModel: FilmsViewModel by activityViewModels()
+    val countiresAdapter = FilterAdapter()
+    val genresAdapter = FilterAdapter()
     private val binding get() = _binding!!
-    val list = mutableListOf<String>()
+    val countriesList = mutableListOf<String>()
+    val genresList = mutableListOf<String>()
     val TAG = "FilterFragment"
 
 
@@ -50,47 +51,49 @@ class FilterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val manager = LinearLayoutManager(requireActivity()) // LayoutManager
-        val adapter = FilterAdapter()  // LayoutManager
-        // Создание объекта
-        Log.d("lifecycle", "onViewCreated: debounce2 doneАШДЕУК")
+        val managerCountries = LinearLayoutManager(requireActivity())
+        val managerGenres = LinearLayoutManager(requireActivity())
 
-        binding.recyclerViewFilter.layoutManager =
-            manager
-        binding.recyclerViewFilter.adapter = adapter
-        adapter.data = Global.COUNTRIES//вызвать метод из апишки ту не забудь инде
+        binding.recyclerViewFilter.layoutManager = managerCountries
+        binding.recyclerViewFilter.adapter = countiresAdapter
+        countiresAdapter.data = Global.COUNTRIES//вызвать метод из апишки ту не забудь инде
 
-        val str = StringBuilder()
+        binding.recyclerViewFilterGenres.layoutManager = managerGenres
+        binding.recyclerViewFilterGenres.adapter = genresAdapter
+        genresAdapter.data = Global.GENRES//вызвать метод из апишки ту не забудь инде
 
-        adapter.onFilterClickListener = {
-            if (!list.contains(it)) {
-                list += it
-                if (str.isEmpty()) {
-                    str.append(it)
-                } else{
-                    str.append(", $it")
-                }
-                binding.tvCountries.text = str
+
+        countiresAdapter.onFilterClickListener = {
+            if (!countriesList.contains(it)) {
+                countriesList += it
+            } else {
+                countriesList.remove(it)
+            }
+        }
+
+        genresAdapter.onFilterClickListener = {
+            if (!genresList.contains(it)) {
+                genresList += it
+            } else {
+                genresList.remove(it)
             }
         }
 
         binding.btFilters.setOnClickListener() {
             val ageRate = parseAgeRating(binding.etAgerating.text.toString())
             val years = parseYears(binding.etYear.text.toString())
-            Log.d(
-                TAG,
-                "age: ${parseAgeRating(binding.etAgerating.text.toString())}   $years  ${ parseCountries(binding.tvCountries.text.toString())}"
-            )
+
 
             if ((ageRate != null) &&
                 (years != null)
             ) {
-
                 FilterFlow.sendData(
                     Filter(
                         years,
                         ageRate,
-                        parseCountries(binding.tvCountries.text.toString())
+                        countriesList,
+                        seekBarPosition(),
+                        genresList
                     )
                 )
 
@@ -107,6 +110,24 @@ class FilterFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun seekBarPosition():Boolean? {
+        when (binding.seekBar.progress) {
+            0 -> {
+                return true
+            }
+
+            1 -> {
+                return null
+            }
+
+            2 -> {
+                return false
+            }
+        }
+
+        return null
     }
 
 

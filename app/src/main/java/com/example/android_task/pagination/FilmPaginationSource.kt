@@ -68,7 +68,9 @@ class FilmPaginationSource(
                         currentPage,
                         data!!.listYears,
                         data!!.listAgeRating,
-                        data!!.listCountries
+                        data!!.listCountries,
+                        data!!.isSeries,
+                        data!!.listGenres,
                     )
                 }
 

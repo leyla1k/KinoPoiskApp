@@ -1,79 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black">
 
-
-    <TextView
-        android:id="@+id/tv_agerating"
-        android:textSize="@dimen/_15sdp"
-        android:layout_marginTop = "16dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Введите возрастной рейтинг (Например, 12 или 12-18)" />
-
-    <EditText
-        android:id="@+id/et_agerating"
-        android:layout_marginTop = "16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_background"
-        android:inputType="text"
-        android:autofillHints="" />
-
-    <TextView
-        android:id="@+id/tv_year"
-        android:textSize="@dimen/_15sdp"
-        android:layout_marginTop = "16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Введите года и промежутки через запятую (Например, 1992, 1982-1998)" />
-
-    <EditText
-        android:id="@+id/et_year"
-        android:layout_marginTop = "16dp"
-        android:background="@drawable/edittext_background"
-        android:inputType="text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints="" />
-    <TextView
-        android:id="@+id/countries"
-        android:textSize="@dimen/_15sdp"
-        android:layout_marginTop = "16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Выберите страны (листайте)" />
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFilter"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        tools:listitem="@layout/filter_item" />
+        <TextView
+            android:id="@+id/tv_agerating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Введите возрастной рейтинг (Например, 12 или 12-18)"
+            android:textSize="@dimen/_15sdp" />
 
-    <TextView
-        android:id="@+id/tv_countries"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="" />
+        <EditText
+            android:id="@+id/et_agerating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:background="@drawable/edittext_background"
+            android:inputType="text" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_filters"
+        <TextView
+            android:id="@+id/tv_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Введите года и промежутки через запятую (Например, 1992, 1982-1998)"
+            android:textSize="@dimen/_15sdp" />
 
-        app:backgroundTint="@null"
-        android:background="@drawable/gradient_orange_to_yellow"
+        <EditText
+            android:id="@+id/et_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:background="@drawable/edittext_background"
+            android:inputType="text" />
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Отфильтровать" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/countries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Выберите страны (листайте)"
+            android:textSize="@dimen/_15sdp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilter"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            tools:listitem="@layout/filter_item" />
+
+
+
+        <TextView
+            android:id="@+id/tv_genres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Выберите жанры (листайте)"
+            android:textSize="@dimen/_15sdp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilterGenres"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            tools:listitem="@layout/filter_item" />
+
+
+        <TextView
+            android:id="@+id/tv_isSeries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Это сериал? Да/Неважно/Нет"
+            android:textSize="@dimen/_15sdp" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:progressTint="@color/white"
+            android:thumbTint="@color/white"
+            android:layout_marginTop="16dp"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="2"
+            android:progress="1" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_filters"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/gradient_orange_to_yellow"
+            android:text="Отфильтровать"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+</ScrollView>

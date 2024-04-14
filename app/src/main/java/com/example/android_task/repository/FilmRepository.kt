@@ -30,10 +30,12 @@ class FilmRepository @Inject constructor(
         page: Int,
         year: List<String>?,
         ageRating: List<String>?,
-        countries: List<String>?
+        countries: List<String>?,
+        isSeries: Boolean?,
+        genre: List<String>?
     ) = api.getFilmsListByFilter(
         page, 10,
-        year, ageRating, countries
+        year, ageRating, countries, isSeries ,genre
     )
 
     suspend fun getPosters(

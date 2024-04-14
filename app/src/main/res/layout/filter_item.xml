@@ -17,6 +17,8 @@
 
 
         <TextView
+            app:backgroundTint="@null"
+
             android:id="@+id/tv_country"
             android:textSize="@dimen/_15sdp"
             android:gravity="center"
